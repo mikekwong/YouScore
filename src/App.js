@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Players from "./Players/Players";
 import fanDuel from "./api/fanDuel";
 import "./App.css";
@@ -13,6 +13,8 @@ const App = () => {
     };
     fetchData();
   }, []);
+
+  // useMemo(useEffect, [data]);
 
   return (
     <div className="App">
