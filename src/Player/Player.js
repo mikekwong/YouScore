@@ -15,7 +15,6 @@ const Player = ({ player }) => {
 
   return (
     <div onClick={handleClick}>
-      {console.log(fppg)}
       <img src={url} alt="profile" />
       <p>{first_name}</p>
       {/* <p>{fppg.toFixed(1) || `${fppg}.0`}</p> */}
