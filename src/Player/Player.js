@@ -2,23 +2,25 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./Player.css";
 
-const Player = ({ player }) => {
+const Player = ({ player, onPlayerSelect, isCorrect }) => {
   const {
     first_name,
+    last_name,
     fppg,
     images: {
       default: { url }
     }
   } = player;
 
-  const handleClick = () => {};
-
   return (
-    <div onClick={handleClick}>
+    <div onClick={e => onPlayerSelect(e)}>
       <img src={url} alt="profile" />
-      <p>{first_name}</p>
-      {/* <p>{fppg.toFixed(1) || `${fppg}.0`}</p> */}
+      <p>
+        {first_name} {last_name}
+      </p>
       <p>{fppg.toFixed(1)}</p>
+      {/* {isCorrect && <p>{fppg.toFixed(1)}</p>} */}
+      {isCorrect && <p>Correct</p>}
     </div>
   );
 };
