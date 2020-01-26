@@ -1,90 +1,78 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-import Player from "../Player/Player";
-import "./Players.css";
-import _ from "lodash";
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
+import Player from '../Player/Player'
+import './Players.css'
+import _ from 'lodash'
 
-const Players = ({ fppgPlayers, setData }) => {
-  const [isCorrect, setIsCorrect] = useState(false);
-  const [correctGuesses, setCorrectGuesses] = useState(0);
-  const [selectPlayer, setSelectPlayer] = useState(false);
-  // this hook to allow the component to re-render on call
-  const [, setState] = useState();
+const Players = ({ fppgPlayers, cachedPlayers, setCachedPlayers }) => {
+  const [playerSelected, setPlayerSelected] = useState(false)
+  const [correctCount, setCorrectCount] = useState(0)
+  const [correct, setCorrect] = useState(false)
 
   const playerGroup = () => {
-    const randomPlayer = Math.floor(Math.random() * fppgPlayers.length - 6) + 0;
+    const randomPlayer = Math.floor(Math.random() * fppgPlayers.length - 6) + 0
 
-    return fppgPlayers.splice(randomPlayer, 2);
-  };
+    return fppgPlayers.splice(randomPlayer, 2)
+  }
 
-  const players = playerGroup();
+  const currentPlayers = playerGroup()
 
-  console.log(fppgPlayers);
+  const highestScore = Math.max(...currentPlayers.map(player => player.fppg))
+  const onClickPlayer = e => {
+    const { src, textContent } = e.target
 
-  const onHandleClick = e => {
-    const { src, textContent } = e.target;
-    const highestScore = Math.max(...players.map(player => player.fppg));
-    console.log("clicked");
-
-    if (textContent && correctGuesses < 10) {
-      setSelectPlayer(true);
-
+    if (correct < 10 && playerSelected === false) {
+      setCachedPlayers(currentPlayers)
+      setPlayerSelected(true)
       if (
-        _.filter(
-          players,
-          player => `${player.first_name} ${player.last_name}` === textContent
-        )[0].fppg === highestScore
-      ) {
-        // setCorrectGuesses(correctGuesses + 1);
-        // setIsCorrect(true);
-      } else {
-        // setIsCorrect(false);
-      }
-    }
-    if (src && correctGuesses < 10) {
-      setSelectPlayer(true);
-
-      if (
-        _.filter(players, player => player.images.default.url === src)[0]
+        _.filter(currentPlayers, player => player.images.default.url === src)[0]
           .fppg === highestScore
       ) {
-        // setCorrectGuesses(correctGuesses + 1);
-        // setIsCorrect(true);
+        setCorrect(true)
+        setCorrectCount(correctCount + 1)
+        console.log(correct)
       } else {
-        // setIsCorrect(false);
+        setCorrect(false)
+        console.log(correct)
       }
     }
-    // re-render component
-    // setState({});
-    setSelectPlayer(false);
-  };
+  }
 
-  console.log(correctGuesses);
-  const playerNums = players.map(player => player.fppg);
-  console.log(playerNums);
+  const mapPlayers = players => {
+    return _.map(players, player => (
+      <Player
+        key={player.id}
+        onClickPlayer={onClickPlayer}
+        player={player}
+        playerSelected={playerSelected}
+      />
+    ))
+  }
 
-  console.log(selectPlayer);
+  const playerNums = currentPlayers.map(player => player.fppg)
+  console.log(playerNums)
+
+  console.log(currentPlayers)
   return (
     <div>
-      {isCorrect ? <p>You win!</p> : <p>You lose!</p>}
-      {selectPlayer && <p>{playerNums[0].toFixed(1)}</p>}
-      {_.map(players, player => {
-        return (
-          <Player
-            onHandleClick={onHandleClick}
-            selectPlayer={selectPlayer}
-            key={player.id}
-            player={player}
-            isCorrect={isCorrect}
-          />
-        );
-      })}
+      <p>Correct times: {correctCount}</p>
+      {!playerSelected ? (
+        <div>{mapPlayers(currentPlayers)}</div>
+      ) : (
+        <div>
+          {correct ? <p>You win!</p> : <p>You lose!</p>}
+          <button onClick={() => setPlayerSelected(false)}>NEXT ROUND</button>
+          {mapPlayers(cachedPlayers)}
+        </div>
+      )}
     </div>
-  );
-};
+  )
+}
 
 Players.propTypes = {
-  fppgPlayers: PropTypes.array.isRequired
-};
+  fppgPlayers: PropTypes.array.isRequired,
+  cachedPlayers: PropTypes.array.isRequired,
+  setCachedPlayers: PropTypes.func.isRequired
+}
 
-export default Players;
+export default Players

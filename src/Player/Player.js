@@ -1,8 +1,8 @@
-import React from "react";
-import PropTypes from "prop-types";
-import "./Player.css";
+import React from 'react'
+import PropTypes from 'prop-types'
+import './Player.css'
 
-const Player = ({ player, onHandleClick, isCorrect, selectPlayer }) => {
+const Player = ({ player, onClickPlayer, playerSelected }) => {
   const {
     first_name,
     last_name,
@@ -10,23 +10,26 @@ const Player = ({ player, onHandleClick, isCorrect, selectPlayer }) => {
     images: {
       default: { url }
     }
-  } = player;
+  } = player
 
   return (
     <div>
-      <img src={url} alt="profile" onClick={e => onHandleClick(e)} />
-      <p onClick={e => onHandleClick(e)}>
-        {first_name} {last_name}
-      </p>
-      {/* <p>{fppg.toFixed(1)}</p> */}
-      {/* {selectPlayer && <p>{fppg.toFixed(1)}</p>} */}
-      {/* {isCorrect ? <p>Correct</p> : <p>Wrong</p>} */}
+      <div>
+        <img src={url} alt='profile' onClick={e => onClickPlayer(e)} />
+        <p>
+          {first_name} {last_name}
+        </p>
+        {playerSelected && <p>{fppg.toFixed(1)}</p>}
+      </div>
+      <p>{fppg.toFixed(1)}</p>
     </div>
-  );
-};
+  )
+}
 
 Player.propTypes = {
-  player: PropTypes.object.isRequired
-};
+  player: PropTypes.object.isRequired,
+  onClickPlayer: PropTypes.func.isRequired,
+  playerSelected: PropTypes.bool.isRequired
+}
 
-export default Player;
+export default Player
