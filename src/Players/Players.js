@@ -17,11 +17,11 @@ const Players = ({ fppgPlayers, cachedPlayers, setCachedPlayers }) => {
 
   const currentPlayers = playerGroup()
 
-  const highestScore = Math.max(...currentPlayers.map(player => player.fppg))
   const onClickPlayer = e => {
     const { src, textContent } = e.target
+    const highestScore = Math.max(...currentPlayers.map(player => player.fppg))
 
-    if (correct < 10 && playerSelected === false) {
+    if (correctCount < 10 && playerSelected === false) {
       setCachedPlayers(currentPlayers)
       setPlayerSelected(true)
       if (
