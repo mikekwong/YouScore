@@ -1,42 +1,44 @@
-import React, { useState } from 'react'
-import PropTypes from 'prop-types'
-import Player from '../Player/Player'
-import './Players.css'
-import _ from 'lodash'
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import Player from "../Player/Player";
+import "./Players.css";
+import _ from "lodash";
 
 const Players = ({ fppgPlayers, cachedPlayers, setCachedPlayers }) => {
-  const [playerSelected, setPlayerSelected] = useState(false)
-  const [correctCount, setCorrectCount] = useState(0)
-  const [correct, setCorrect] = useState(false)
+  const [playerSelected, setPlayerSelected] = useState(false);
+  const [correctCount, setCorrectCount] = useState(0);
+  const [correct, setCorrect] = useState(false);
+
+  console.log("ffpg", fppgPlayers);
 
   const playerGroup = () => {
-    const randomPlayer = Math.floor(Math.random() * fppgPlayers.length - 6) + 0
+    const randomPlayer = Math.floor(Math.random() * fppgPlayers.length - 6) + 0;
 
-    return fppgPlayers.splice(randomPlayer, 2)
-  }
+    return fppgPlayers.splice(randomPlayer, 2);
+  };
 
-  const currentPlayers = playerGroup()
+  const currentPlayers = playerGroup();
 
   const onClickPlayer = e => {
-    const { src, textContent } = e.target
-    const highestScore = Math.max(...currentPlayers.map(player => player.fppg))
+    const { src, textContent } = e.target;
+    const highestScore = Math.max(...currentPlayers.map(player => player.fppg));
 
     if (correctCount < 10 && playerSelected === false) {
-      setCachedPlayers(currentPlayers)
-      setPlayerSelected(true)
+      setCachedPlayers(currentPlayers);
+      setPlayerSelected(true);
       if (
         _.filter(currentPlayers, player => player.images.default.url === src)[0]
           .fppg === highestScore
       ) {
-        setCorrect(true)
-        setCorrectCount(correctCount + 1)
-        console.log(correct)
+        setCorrect(true);
+        setCorrectCount(correctCount + 1);
+        console.log(correct);
       } else {
-        setCorrect(false)
-        console.log(correct)
+        setCorrect(false);
+        console.log(correct);
       }
     }
-  }
+  };
 
   const mapPlayers = players => {
     return _.map(players, player => (
@@ -46,13 +48,13 @@ const Players = ({ fppgPlayers, cachedPlayers, setCachedPlayers }) => {
         player={player}
         playerSelected={playerSelected}
       />
-    ))
-  }
+    ));
+  };
 
-  const playerNums = currentPlayers.map(player => player.fppg)
-  console.log(playerNums)
+  const playerNums = currentPlayers.map(player => player.fppg);
+  console.log(playerNums);
 
-  console.log(currentPlayers)
+  console.log(currentPlayers);
   return (
     <div>
       <p>Correct times: {correctCount}</p>
@@ -66,13 +68,53 @@ const Players = ({ fppgPlayers, cachedPlayers, setCachedPlayers }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
 Players.propTypes = {
-  fppgPlayers: PropTypes.array.isRequired,
-  cachedPlayers: PropTypes.array.isRequired,
+  fppgPlayers: PropTypes.arrayOf(
+    PropTypes.shape({
+      first_name: PropTypes.string.isRequired,
+      fixture: PropTypes.object,
+      fppg: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
+      images: PropTypes.object.isRequired,
+      injured: PropTypes.bool,
+      injury_details: PropTypes.string,
+      injury_status: PropTypes.string,
+      last_name: PropTypes.string.isRequired,
+      news: PropTypes.object,
+      played: PropTypes.number,
+      player_card_url: PropTypes.string,
+      position: PropTypes.string,
+      removed: PropTypes.bool,
+      salary: PropTypes.number,
+      starting_order: PropTypes.bool,
+      team: PropTypes.object
+    })
+  ).isRequired,
+  cachedPlayers: PropTypes.arrayOf(
+    PropTypes.shape({
+      first_name: PropTypes.string.isRequired,
+      fixture: PropTypes.object,
+      fppg: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
+      images: PropTypes.object.isRequired,
+      injured: PropTypes.bool,
+      injury_details: PropTypes.string,
+      injury_status: PropTypes.string,
+      last_name: PropTypes.string.isRequired,
+      news: PropTypes.object,
+      played: PropTypes.number,
+      player_card_url: PropTypes.string,
+      position: PropTypes.string,
+      removed: PropTypes.bool,
+      salary: PropTypes.number,
+      starting_order: PropTypes.bool,
+      team: PropTypes.object
+    })
+  ).isRequired,
   setCachedPlayers: PropTypes.func.isRequired
-}
+};
 
-export default Players
+export default Players;
