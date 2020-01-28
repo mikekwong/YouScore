@@ -1,38 +1,41 @@
-import React, { useState, useEffect } from 'react'
-import Players from './Players/Players'
-import fanDuel from './api/fanDuel'
-import './App.css'
-import _ from 'lodash'
+import React, { useState, useEffect } from "react";
+import Players from "./Players/Players";
+import fanDuel from "./api/fanDuel";
+import "./App.css";
+import _ from "lodash";
 
 const App = () => {
-  const [data, setData] = useState({ players: [] })
-  const [isLoading, setIsLoading] = useState(false)
-  const [isError, setIsError] = useState('')
-  const [isFetched, setIsFetched] = useState(false)
-  const [cachedPlayers, setCachedPlayers] = useState([])
+  const [data, setData] = useState({ players: [] });
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState("");
+  const [isFetched, setIsFetched] = useState(false);
+  const [cachedPlayers, setCachedPlayers] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setIsLoading(true)
-        const result = await fanDuel('Player.json')
-        setData(result.data)
-        setIsFetched(true)
+        setIsLoading(true);
+        const response = await fanDuel.get("Player.json");
+        if (response.status === 200) {
+          setData(response.data);
+          setIsFetched(true);
+        }
       } catch (error) {
-        setIsError(error.toString())
+        setIsError(error.toString());
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false)
-    }
-    fetchData()
-  }, [])
+    };
+    fetchData();
+  }, []);
 
   // Discard players that having null fppg values
-  const fppgPlayers = _.filter(data.players, player => player.fppg !== null)
+  const fppgPlayers = _.filter(data.players, player => player.fppg !== null);
 
   return (
-    <div className='App'>
+    <div className="App">
       {isError && <p>Something went wrong...</p>}
-      {isLoading ? (
+      {isLoading && !isFetched && data.players.length === 0 ? (
         <p>Loading...</p>
       ) : (
         <Players
@@ -42,7 +45,7 @@ const App = () => {
         />
       )}
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
