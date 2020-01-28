@@ -28,7 +28,6 @@ describe("Fetch API successfully without errors", () => {
     expect(result.current.data).toEqual([]);
     expect(result.current.loading).toBeTruthy();
     expect(result.current.error).toEqual("");
-    expect(result.current.fetched).toBeFalsy();
 
     // emulate custom fetch
     await waitForNextUpdate();
@@ -37,7 +36,6 @@ describe("Fetch API successfully without errors", () => {
     expect(result.current.data).toEqual("response");
     expect(result.current.loading).toBeFalsy();
     expect(result.current.error).toEqual("");
-    expect(result.current.fetched).toBeTruthy();
   });
 
   test("useFetch sets loading and fetched to false, and returns initial value and error log on network error", async () => {
@@ -49,14 +47,12 @@ describe("Fetch API successfully without errors", () => {
     );
 
     expect(result.current.loading).toBeTruthy();
-    expect(result.current.fetched).toBeFalsy();
     expect(result.current.data).toEqual([]);
     expect(result.current.error).toEqual("");
 
     await waitForNextUpdate();
 
     expect(result.current.loading).toBeFalsy();
-    expect(result.current.fetched).toBeFalsy();
     expect(result.current.data).toEqual([]);
     expect(result.current.error).not.toEqual("");
   });

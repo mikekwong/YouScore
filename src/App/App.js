@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import Players from "./Players/Players";
 import "./App.css";
 import _ from "lodash";
-import useFetch from "./api/useFetch";
+import useFetch from "../utils/useFetch";
+
+import Main from "../Main/Main";
 
 const App = () => {
   const [cachedPlayers, setCachedPlayers] = useState([]);
@@ -22,16 +23,13 @@ const App = () => {
 
   return (
     <div className="App">
-      {error && <p>Something went wrong...</p>}
-      {loading && !fetched && data.length === 0 ? (
-        <p>Loading...</p>
-      ) : (
-        <Players
-          fppgPlayers={fppgPlayers}
-          cachedPlayers={cachedPlayers}
-          setCachedPlayers={setCachedPlayers}
-        />
-      )}
+      <Main
+        loading={loading}
+        error={error}
+        fppgPlayers={fppgPlayers}
+        cachedPlayers={cachedPlayers}
+        setCachedPlayers={setCachedPlayers}
+      />
     </div>
   );
 };

@@ -56,7 +56,7 @@ const Players = ({ fppgPlayers, cachedPlayers, setCachedPlayers }) => {
 
   console.log(currentPlayers);
   return (
-    <div>
+    <div className="container-players">
       <p>Correct times: {correctCount}</p>
       {!playerSelected ? (
         <div>{mapPlayers(currentPlayers)}</div>
