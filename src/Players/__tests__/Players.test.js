@@ -1,15 +1,15 @@
-import React from 'react'
-import { shallow } from 'enzyme'
+import React from "react";
+import { shallow } from "enzyme";
 
-import Players from '../Players'
+import Players from "../Players";
 
-describe('Players', () => {
-  let wrapper
-  beforeEach(() => {
-    wrapper = shallow(<Players />)
-  })
+// describe("Players", () => {
+//   let wrapper;
+//   beforeEach(() => {
+//     wrapper = shallow(<Players />);
+//   });
 
-  test('should render a <div/>', () => {
-    expect(wrapper.find('div').length).toEqual(1)
-  })
-})
+//   test("should render a <div/>", () => {
+//     expect(wrapper.find("div").length).toEqual(1);
+//   });
+// });
