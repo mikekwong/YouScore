@@ -4,27 +4,60 @@ import MockAdapter from "axios-mock-adapter";
 
 import useFetch from "../useFetch";
 
-test("useFetch performs GET request", async () => {
-  const initialValue = [];
-  const mock = new MockAdapter(axios);
+describe("Fetch API successfully without errors", () => {
+  let initialValue;
+  let mock;
+  let url;
 
-  const mockData = "response";
-  const url = "http://mock";
-  mock.onGet(url).reply(200, mockData);
+  beforeEach(() => {
+    initialValue = [];
+    mock = new MockAdapter(axios);
+    // Mock network call. Instruct axios-mock-adapter to return with expected data and status code of 200.
+    url = "http://mock";
+  });
 
-  const { result, waitForNextUpdate } = renderHook(() =>
-    useFetch(url, initialValue)
-  );
+  test("useFetch performs GET request", async () => {
+    const mockData = "response";
+    mock.onGet(url).reply(200, mockData);
 
-  expect(result.current.data).toEqual([]);
-  expect(result.current.loading).toBeTruthy();
-  expect(result.current.error).toEqual("");
-  expect(result.current.fetched).toBeFalsy();
+    // Invoke custom hook
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useFetch(url, initialValue)
+    );
+    // initial values before fetch
+    expect(result.current.data).toEqual([]);
+    expect(result.current.loading).toBeTruthy();
+    expect(result.current.error).toEqual("");
+    expect(result.current.fetched).toBeFalsy();
 
-  await waitForNextUpdate();
+    // emulate custom fetch
+    await waitForNextUpdate();
 
-  expect(result.current.data).toEqual("response");
-  expect(result.current.loading).toBeFalsy();
-  expect(result.current.error).toEqual("");
-  expect(result.current.fetched).toBeTruthy();
+    // updated states after fetch
+    expect(result.current.data).toEqual("response");
+    expect(result.current.loading).toBeFalsy();
+    expect(result.current.error).toEqual("");
+    expect(result.current.fetched).toBeTruthy();
+  });
+
+  test("useFetch sets loading and fetched to false, and returns initial value and error log on network error", async () => {
+    mock.onGet(url).networkError();
+
+    // Invoke custom hook
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useFetch(url, initialValue)
+    );
+
+    expect(result.current.loading).toBeTruthy();
+    expect(result.current.fetched).toBeFalsy();
+    expect(result.current.data).toEqual([]);
+    expect(result.current.error).toEqual("");
+
+    await waitForNextUpdate();
+
+    expect(result.current.loading).toBeFalsy();
+    expect(result.current.fetched).toBeFalsy();
+    expect(result.current.data).toEqual([]);
+    expect(result.current.error).not.toEqual("");
+  });
 });
