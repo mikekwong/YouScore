@@ -31,9 +31,9 @@ const App = () => {
 
   return (
     <div className='App'>
-      {isError && <div>Something went wrong...</div>}
+      {isError && <p>Something went wrong...</p>}
       {isLoading ? (
-        <div>Loading...</div>
+        <p>Loading...</p>
       ) : (
         <Players
           fppgPlayers={fppgPlayers}
