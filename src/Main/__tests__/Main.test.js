@@ -19,32 +19,32 @@ describe("Error message", () => {
   const setup = (props = {}) => {
     return shallow(<Main {...props} />);
   };
-  test("Error message shows when there is a network error", () => {
+  test("renders error message when `error` prop has a string value", () => {
     const wrapper = setup({ error: "network error" });
     const error = wrapper.find(".error");
-    expect(error).toHaveLength(1);
+    expect(error.length).toBe(1);
   });
-  test("Error message does not show when a network error does not occur", () => {
+  test("does not render error message when `error` prop is an empty string", () => {
     const wrapper = setup({ error: "" });
     const error = wrapper.find(".error");
-    expect(error).toHaveLength(0);
+    expect(error.length).toBe(0);
   });
 });
 
-describe("Render Loading or Players component", () => {
+describe("Player component or loading message", () => {
   const setup = (props = {}) => {
     return shallow(<Main {...props} />);
   };
 
-  test("shows Loading component when loading ", () => {
+  test("shows loading message when `loading` prop is true ", () => {
     const wrapper = setup({ loading: true });
     const loadingIndicator = wrapper.find(".loading");
-    expect(loadingIndicator).toHaveLength(1);
+    expect(loadingIndicator.length).toBe(1);
   });
 
-  test("Main shows Players component when not loading", () => {
+  test("shows Players component when `loading` prop is false", () => {
     const wrapper = setup({ loading: false });
     const players = wrapper.find(Players);
-    expect(players).toHaveLength(1);
+    expect(players.length).toBe(1);
   });
 });

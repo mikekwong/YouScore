@@ -11,7 +11,7 @@ describe("App component", () => {
     wrapper = shallow(<App />);
   });
   test("should render a <div/>", () => {
-    expect(wrapper.find("div").length).toEqual(1);
+    expect(wrapper.find("div").length).toBe(1);
   });
 
   test("should render the Main Component", () => {
