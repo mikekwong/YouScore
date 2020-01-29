@@ -15,8 +15,9 @@ const Players = ({
   const [correct, setCorrect] = useState(false);
 
   const playerGroup = () => {
-    const randomPlayer = Math.floor(Math.random() * fppgPlayers.length - 6) + 0;
-
+    const randomPlayer = Math.floor(
+      Math.random() * Math.floor(fppgPlayers.length - 3)
+    );
     return fppgPlayers.splice(randomPlayer, 2);
   };
 
@@ -62,7 +63,9 @@ const Players = ({
       ) : (
         <div className="selected-players">
           {correct ? <p>You win!</p> : <p>You lose!</p>}
-          <button onClick={() => setPlayerSelected(false)}>NEXT ROUND</button>
+          {correctCount !== 10 && (
+            <button onClick={() => setPlayerSelected(false)}>NEXT ROUND</button>
+          )}
           {mapPlayers(cachedPlayers)}
         </div>
       )}
