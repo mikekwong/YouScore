@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Players from "../Players/Players";
 
 const Main = ({
@@ -8,6 +8,8 @@ const Main = ({
   cachedPlayers,
   setCachedPlayers
 }) => {
+  const [playerSelected, setPlayerSelected] = useState(false);
+
   return (
     <div>
       {error && <p className="error">Something went wrong...</p>}
@@ -15,6 +17,8 @@ const Main = ({
         <p className="loading">Loading...</p>
       ) : (
         <Players
+          playerSelected={playerSelected}
+          setPlayerSelected={setPlayerSelected}
           fppgPlayers={fppgPlayers}
           cachedPlayers={cachedPlayers}
           setCachedPlayers={setCachedPlayers}

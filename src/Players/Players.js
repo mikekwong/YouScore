@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Player from "../Player/Player";
 import "./Players.css";
 import _ from "lodash";
 
-const Players = ({ fppgPlayers, cachedPlayers, setCachedPlayers }) => {
-  const [playerSelected, setPlayerSelected] = useState(false);
+const Players = ({
+  playerSelected,
+  setPlayerSelected,
+  fppgPlayers,
+  cachedPlayers,
+  setCachedPlayers
+}) => {
   const [correctCount, setCorrectCount] = useState(0);
   const [correct, setCorrect] = useState(false);
 
@@ -57,11 +62,11 @@ const Players = ({ fppgPlayers, cachedPlayers, setCachedPlayers }) => {
   console.log(currentPlayers);
   return (
     <div className="container-players">
-      <p>Correct times: {correctCount}</p>
+      <p className="score">Your score: {correctCount}</p>
       {!playerSelected ? (
-        <div>{mapPlayers(currentPlayers)}</div>
+        <div className="unselected-players">{mapPlayers(currentPlayers)}</div>
       ) : (
-        <div>
+        <div className="selected-players">
           {correct ? <p>You win!</p> : <p>You lose!</p>}
           <button onClick={() => setPlayerSelected(false)}>NEXT ROUND</button>
           {mapPlayers(cachedPlayers)}
@@ -72,6 +77,8 @@ const Players = ({ fppgPlayers, cachedPlayers, setCachedPlayers }) => {
 };
 
 Players.propTypes = {
+  playerSelected: PropTypes.bool.isRequired,
+  setPlayerSelected: PropTypes.func.isRequired,
   fppgPlayers: PropTypes.arrayOf(
     PropTypes.shape({
       first_name: PropTypes.string.isRequired,

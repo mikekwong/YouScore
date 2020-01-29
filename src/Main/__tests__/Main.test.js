@@ -6,11 +6,8 @@ import Main from "../Main";
 import Players from "../../Players/Players";
 
 describe("Main component", () => {
-  let wrapper;
-  beforeEach(() => {
-    wrapper = shallow(<Main />);
-  });
   test("should render a <div/>", () => {
+    const wrapper = shallow(<Main />);
     expect(wrapper.find("div").length).toEqual(1);
   });
 });
@@ -19,11 +16,13 @@ describe("Error message", () => {
   const setup = (props = {}) => {
     return shallow(<Main {...props} />);
   };
+
   test("renders error message when `error` prop has a string value", () => {
     const wrapper = setup({ error: "network error" });
     const error = wrapper.find(".error");
-    expect(error.length).toBe(1);
+    expect(error.text()).toEqual("Something went wrong...");
   });
+
   test("does not render error message when `error` prop is an empty string", () => {
     const wrapper = setup({ error: "" });
     const error = wrapper.find(".error");
@@ -39,7 +38,7 @@ describe("Player component or loading message", () => {
   test("shows loading message when `loading` prop is true ", () => {
     const wrapper = setup({ loading: true });
     const loadingIndicator = wrapper.find(".loading");
-    expect(loadingIndicator.length).toBe(1);
+    expect(loadingIndicator.text()).toEqual("Loading...");
   });
 
   test("shows Players component when `loading` prop is false", () => {

@@ -10,6 +10,7 @@ describe("App component", () => {
   beforeEach(() => {
     wrapper = shallow(<App />);
   });
+
   test("should render a <div/>", () => {
     expect(wrapper.find("div").length).toBe(1);
   });
