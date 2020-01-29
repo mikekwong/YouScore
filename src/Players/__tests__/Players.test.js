@@ -98,6 +98,16 @@ describe("Show Player component", () => {
   });
 });
 
+// describe('player is selected', () => {
+//   test('state updates boolean to true upon player selection', () => {
+//     const mockSetPlayerSelected = jest.fn()
+//     React.useState = jest.fn(() => ["", mockSetPlayerSelected])
+
+//     const wrapper = setup()
+//     const
+//   });
+// });
+
 // describe("Score text", () => {
 //   const onClickChange = jest.fn();
 //   let wrapper;
