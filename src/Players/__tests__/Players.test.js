@@ -9,7 +9,7 @@ const dummyArray = [
   {
     id: "1",
     first_name: "John",
-    lastName: "Snow",
+    last_name: "Snow",
     fppg: 82.828592852933,
     images: {},
     injured: false,
@@ -27,7 +27,7 @@ const dummyArray = [
   {
     id: "2",
     first_name: "Stephen",
-    lastName: "Curry",
+    last_name: "Curry",
     fppg: 82.828592852933,
     images: {},
     injured: false,
@@ -44,22 +44,28 @@ const dummyArray = [
   }
 ];
 
-describe("Players component", () => {
-  const setup = (props = {}) => {
-    return shallow(<Players {...props} />);
-  };
+const defaultProps = {
+  loading: false,
+  fppgPlayers: dummyArray,
+  cachedPlayers: dummyArray,
+  setCachedPlayers: dummyFunc,
+  setPlayerSelected: dummyFunc,
+  playerSelected: true
+};
 
+const setup = (props = {}) => {
+  const setupProps = { ...defaultProps, ...props };
+  return shallow(<Players {...setupProps} />);
+};
+
+describe("Players component", () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = setup({
-      fppgPlayers: dummyArray,
-      cachedPlayers: dummyArray,
-      setCachedPlayers: dummyFunc
-    });
+    wrapper = setup();
   });
 
   test("shows Players component ", () => {
-    const players = wrapper.find(".container-players");
+    const players = wrapper;
     expect(players.length).toBe(1);
   });
 
@@ -69,32 +75,50 @@ describe("Players component", () => {
   });
 });
 
-describe("Show Player component", () => {
-  const defaultProps = {
-    fppgPlayers: dummyArray,
-    cachedPlayers: dummyArray,
-    setCachedPlayers: dummyFunc
-  };
-
-  const setup = (props = {}) => {
-    const setupProps = { ...defaultProps, ...props };
-    return shallow(<Players {...setupProps} />);
-  };
-
-  test("Player components renders new players", () => {
-    const wrapper = setup({
-      playerSelected: false
-    });
-    const playerPair = wrapper.find(".container-players");
-    expect(playerPair.length).toBe(1);
+describe("renders status based upon player selection", () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = setup();
   });
 
-  test("Player components renders the same players before next round after selection", () => {
+  test("shows `Correct!` if picking the player with the higher fppg score", () => {
     const wrapper = setup({
-      playerSelected: true
+      correct: true
     });
-    const playerPair = wrapper.find(".selected-players");
-    expect(playerPair.length).toBe(1);
+    const youWin = wrapper.find(".correct");
+    expect(youWin.length).toBe(1);
+  });
+  test("shows `Try Again!` if picking the player with the higher fppg score", () => {
+    const wrapper = setup({
+      correct: false
+    });
+    const youWin = wrapper.find(".incorrect");
+    expect(youWin.length).toBe(1);
+  });
+});
+
+describe("renders the next round button", () => {
+  const setState = jest.fn();
+  const useStateSpy = jest.spyOn(React, "useState");
+  useStateSpy.mockImplementation(init => [init, setState]);
+
+  let wrapper;
+  beforeEach(() => {
+    wrapper = setup();
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("shows the button for next round", () => {
+    const nextRound = wrapper.find("button");
+    expect(nextRound.length).toBe(1);
+  });
+  test("the button clicks", () => {
+    const nextRoundBtn = wrapper.find("button");
+    nextRoundBtn.props().onClick();
+    expect(setState).toHaveBeenCalled();
   });
 });
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import Player from "../Player/Player";
 import "./Players.css";
@@ -9,10 +9,14 @@ const Players = ({
   setPlayerSelected,
   fppgPlayers,
   cachedPlayers,
-  setCachedPlayers
+  setCachedPlayers,
+  correct,
+  setCorrect
 }) => {
-  const [correctCount, setCorrectCount] = useState(0);
-  const [correct, setCorrect] = useState(false);
+  const [correctCount, setCorrectCount] = React.useState(0);
+  const [newRound, setNewRound] = React.useState(true);
+
+  useEffect(() => setPlayerSelected(false));
 
   const playerGroup = () => {
     const randomPlayer = Math.floor(
@@ -25,11 +29,14 @@ const Players = ({
 
   const onClickPlayer = e => {
     const { src, textContent } = e.target;
-    const highestScore = Math.max(...currentPlayers.map(player => player.fppg));
+    const highestScore = Math.max(
+      ..._.map(currentPlayers, player => player.fppg)
+    );
 
-    if (correctCount < 10 && playerSelected === false) {
+    if (correctCount < 10 && playerSelected === false && newRound === true) {
       setCachedPlayers(currentPlayers);
       setPlayerSelected(true);
+      setNewRound(false);
       if (
         _.filter(currentPlayers, player => player.images.default.url === src)[0]
           .fppg === highestScore
@@ -49,77 +56,82 @@ const Players = ({
         onClickPlayer={onClickPlayer}
         player={player}
         playerSelected={playerSelected}
+        newRound={newRound}
       />
     ));
   };
 
-  const playerNums = currentPlayers.map(player => player.fppg);
+  const playerNums = _.map(currentPlayers, player => player.fppg);
 
   return (
     <div className="container-players">
       <p className="score">Your score: {correctCount}</p>
       {!playerSelected ? (
-        <div className="unselected-players">{mapPlayers(currentPlayers)}</div>
+        mapPlayers(currentPlayers)
       ) : (
-        <div className="selected-players">
-          {correct ? <p>You win!</p> : <p>You lose!</p>}
+        <Fragment>
+          {correct ? (
+            <p className="correct">Correct!</p>
+          ) : (
+            <p className="incorrect">Try again!</p>
+          )}
           {correctCount !== 10 && (
-            <button onClick={() => setPlayerSelected(false)}>NEXT ROUND</button>
+            <button onClick={() => setNewRound(true)}>NEXT ROUND</button>
           )}
           {mapPlayers(cachedPlayers)}
-        </div>
+        </Fragment>
       )}
     </div>
   );
 };
 
-// Players.propTypes = {
-//   playerSelected: PropTypes.bool.isRequired,
-//   setPlayerSelected: PropTypes.func.isRequired,
-//   fppgPlayers: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       first_name: PropTypes.string.isRequired,
-//       fixture: PropTypes.object,
-//       fppg: PropTypes.number.isRequired,
-//       id: PropTypes.string.isRequired,
-//       images: PropTypes.object.isRequired,
-//       injured: PropTypes.bool,
-//       injury_details: PropTypes.string,
-//       injury_status: PropTypes.string,
-//       last_name: PropTypes.string.isRequired,
-//       news: PropTypes.object,
-//       played: PropTypes.number,
-//       player_card_url: PropTypes.string,
-//       position: PropTypes.string,
-//       removed: PropTypes.bool,
-//       salary: PropTypes.number,
-//       starting_order: PropTypes.bool,
-//       team: PropTypes.object
-//     })
-//   ).isRequired,
-//   cachedPlayers:
-//     PropTypes.arrayOf(
-//       PropTypes.shape({
-//         first_name: PropTypes.string.isRequired,
-//         fixture: PropTypes.object,
-//         fppg: PropTypes.number.isRequired,
-//         id: PropTypes.string.isRequired,
-//         images: PropTypes.object.isRequired,
-//         injured: PropTypes.bool,
-//         injury_details: PropTypes.string,
-//         injury_status: PropTypes.string,
-//         last_name: PropTypes.string.isRequired,
-//         news: PropTypes.object,
-//         played: PropTypes.number,
-//         player_card_url: PropTypes.string,
-//         position: PropTypes.string,
-//         removed: PropTypes.bool,
-//         salary: PropTypes.number,
-//         starting_order: PropTypes.bool,
-//         team: PropTypes.object
-//       })
-//     ) || PropTypes.array,
-//   setCachedPlayers: PropTypes.func.isRequired
-// };
+Players.propTypes = {
+  playerSelected: PropTypes.bool.isRequired,
+  setPlayerSelected: PropTypes.func.isRequired,
+  fppgPlayers: PropTypes.arrayOf(
+    PropTypes.shape({
+      first_name: PropTypes.string.isRequired,
+      fixture: PropTypes.object,
+      fppg: PropTypes.number.isRequired,
+      id: PropTypes.string.isRequired,
+      images: PropTypes.object.isRequired,
+      injured: PropTypes.bool,
+      injury_details: PropTypes.string,
+      injury_status: PropTypes.string,
+      last_name: PropTypes.string.isRequired,
+      news: PropTypes.object,
+      played: PropTypes.number,
+      player_card_url: PropTypes.string,
+      position: PropTypes.string,
+      removed: PropTypes.bool,
+      salary: PropTypes.number,
+      starting_order: PropTypes.bool,
+      team: PropTypes.object
+    })
+  ).isRequired,
+  cachedPlayers:
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        first_name: PropTypes.string.isRequired,
+        fixture: PropTypes.object,
+        fppg: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
+        images: PropTypes.object.isRequired,
+        injured: PropTypes.bool,
+        injury_details: PropTypes.string,
+        injury_status: PropTypes.string,
+        last_name: PropTypes.string.isRequired,
+        news: PropTypes.object,
+        played: PropTypes.number,
+        player_card_url: PropTypes.string,
+        position: PropTypes.string,
+        removed: PropTypes.bool,
+        salary: PropTypes.number,
+        starting_order: PropTypes.bool,
+        team: PropTypes.object
+      })
+    ) || PropTypes.array,
+  setCachedPlayers: PropTypes.func.isRequired
+};
 
 export default Players;

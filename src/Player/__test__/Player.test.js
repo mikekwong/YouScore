@@ -19,7 +19,7 @@ const dummyFunc = () => {};
 const dummyArray = {
   id: "1",
   first_name: "John",
-  lastName: "Snow",
+  last_name: "Snow",
   fppg: 82.828592852933,
   images: { default: "http://test.com/me.png" },
   injured: false,
@@ -47,15 +47,14 @@ describe("Player component", () => {
     wrapper = setup({
       player: dummyArray,
       onClickPlayer: dummyFunc,
-      playerSelected: dummyFunc
+      setPlayerSelected: dummyFunc,
+      playerSelected: true
     });
   });
 
   test("shows Players component ", () => {
     wrapper.find("div");
     expect(wrapper.find("div").length).toEqual(1);
-
-    console.log(wrapper.debug());
   });
 
   test("shows img tag", () => {

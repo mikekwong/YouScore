@@ -23,28 +23,28 @@ const Player = ({ player, onClickPlayer, playerSelected }) => {
   );
 };
 
-// Player.propTypes = {
-//   player: PropTypes.shape({
-//     first_name: PropTypes.string.isRequired,
-//     fixture: PropTypes.object,
-//     fppg: PropTypes.number.isRequired,
-//     id: PropTypes.string.isRequired,
-//     images: PropTypes.object.isRequired,
-//     injured: PropTypes.bool,
-//     injury_details: PropTypes.string,
-//     injury_status: PropTypes.string,
-//     last_name: PropTypes.string.isRequired,
-//     news: PropTypes.object,
-//     played: PropTypes.number,
-//     player_card_url: PropTypes.string,
-//     position: PropTypes.string,
-//     removed: PropTypes.bool,
-//     salary: PropTypes.number,
-//     starting_order: PropTypes.bool,
-//     team: PropTypes.object
-//   }).isRequired,
-//   onClickPlayer: PropTypes.func.isRequired,
-//   playerSelected: PropTypes.bool.isRequired
-// };
+Player.propTypes = {
+  player: PropTypes.shape({
+    first_name: PropTypes.string.isRequired,
+    fixture: PropTypes.object,
+    fppg: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
+    images: PropTypes.object.isRequired,
+    injured: PropTypes.bool,
+    injury_details: PropTypes.string,
+    injury_status: PropTypes.string,
+    last_name: PropTypes.string.isRequired,
+    news: PropTypes.object,
+    played: PropTypes.number,
+    player_card_url: PropTypes.string,
+    position: PropTypes.string,
+    removed: PropTypes.bool,
+    salary: PropTypes.number,
+    starting_order: PropTypes.bool,
+    team: PropTypes.object
+  }).isRequired,
+  onClickPlayer: PropTypes.func.isRequired,
+  playerSelected: PropTypes.bool.isRequired
+};
 
 export default Player;

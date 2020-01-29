@@ -23,6 +23,7 @@ const App = () => {
 
   return (
     <div className="App">
+      <h1>Guess which player has a higher FPPG?</h1>
       <Main
         loading={loading}
         error={error}
