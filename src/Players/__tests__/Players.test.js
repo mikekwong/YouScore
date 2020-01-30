@@ -68,15 +68,15 @@ describe("renders status based upon player selection", () => {
     const wrapper = setup({
       correct: true
     });
-    const youWin = wrapper.find(".correct");
-    expect(youWin.length).toBe(1);
+    const correct = wrapper.find(".correct");
+    expect(correct.text()).toEqual("Correct!");
   });
-  test("shows `Try Again!` if picking the player with the higher fppg score", () => {
+  test("shows `Incorrect!` if picking the player with the higher fppg score", () => {
     const wrapper = setup({
       correct: false
     });
-    const youWin = wrapper.find(".incorrect");
-    expect(youWin.length).toBe(1);
+    const incorrect = wrapper.find(".incorrect");
+    expect(incorrect.text()).toEqual("Incorrect!");
   });
 });
 

@@ -75,7 +75,7 @@ const Players = ({
           {correct ? (
             <p className="status correct">Correct!</p>
           ) : (
-            <p className="status incorrect">Try again!</p>
+            <p className="status incorrect">Incorrect!</p>
           )}
           {correctCount !== 10 && (
             <button className="newRound" onClick={() => setNewRound(true)}>
