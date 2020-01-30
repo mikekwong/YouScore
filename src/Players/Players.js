@@ -71,6 +71,7 @@ const Players = ({
         <div className="players--container">{mapPlayers(currentPlayers)}</div>
       ) : (
         <Fragment>
+          <div className="players--container">{mapPlayers(cachedPlayers)}</div>
           {correct ? (
             <p className="status correct">Correct!</p>
           ) : (
@@ -78,10 +79,9 @@ const Players = ({
           )}
           {correctCount !== 10 && (
             <button className="newRound" onClick={() => setNewRound(true)}>
-              NEXT ROUND
+              Next Round
             </button>
           )}
-          <div className="players--container">{mapPlayers(cachedPlayers)}</div>
         </Fragment>
       )}
     </Fragment>

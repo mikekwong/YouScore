@@ -20,7 +20,7 @@ const Main = ({
         <p className="main__loading">Loading...</p>
       ) : (
         <section className="players">
-          <p className="players__score">Your score: {correctCount}</p>
+          <p className="players__score">Score: {correctCount}</p>
 
           <Players
             correctCount={correctCount}

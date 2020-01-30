@@ -6,8 +6,38 @@
 }
 
 .players__score {
+  margin: 60px auto;
+  color: #fff;
+  width: 120px;
+  font-size: 30px;
+  border-bottom: 6px solid #fff;
+  padding-bottom: 6px;
 }
 
-.players__newRound {
+.players .status {
+  font-size: 20px;
+  color: #fff;
+}
+
+.players .newRound {
+  font-family: inherit;
+  background-color: #fff;
+  color: #1493ff;
+  font-size: 25px;
   cursor: pointer;
+  border: 5px solid transparent;
+  border-radius: 10px;
+  padding: 4px 9px 6px 9px;
+}
+
+.players .newRound:hover {
+  background-color: transparent;
+  color: #fff;
+  border: 5px solid #fff;
+}
+
+@media (max-width: 539px) {
+  .players__score {
+    margin: 30px auto;
+  }
 }

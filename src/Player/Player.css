@@ -1,6 +1,5 @@
 .player--container {
-  /* width: 50%; */
-  margin: 150px auto;
+  margin: 0 40px;
 }
 
 .player__img {
@@ -9,4 +8,18 @@
   background-color: #fff;
   border-radius: 50%;
   border: 10px solid #30e37b;
+}
+
+.player__name {
+  font-size: 25px;
+}
+
+.player__fppg {
+  font-size: 20px;
+}
+
+@media (max-width: 650px) {
+  .player--container {
+    margin: 0 20px 50px 20px;
+  }
 }

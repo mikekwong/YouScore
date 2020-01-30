@@ -1,7 +1,7 @@
 .app {
   background-color: #1493ff;
   text-align: center;
-  height: 1000px;
+  height: 900px;
 }
 
 .header {
@@ -14,4 +14,10 @@
 }
 
 .main {
+}
+
+@media (max-width: 700px) {
+  .app {
+    height: 1400px;
+  }
 }

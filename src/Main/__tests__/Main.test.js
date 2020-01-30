@@ -67,7 +67,7 @@ describe("Main component", () => {
   });
   test("shows default message of zero score", () => {
     const scoreMessage = wrapper.find(".players__score");
-    expect(scoreMessage.text()).toEqual("Your score: 0");
+    expect(scoreMessage.text()).toEqual("Score: 0");
   });
 });
 
