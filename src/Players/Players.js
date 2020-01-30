@@ -20,6 +20,7 @@ const Players = ({
     if (newRound) setPlayerSelected(false);
   });
 
+  // Generate random player from array and return a new pair every time to use for rendering
   const playerGroup = () => {
     const randomPlayer = Math.floor(
       Math.random() * Math.floor(fppgPlayers.length - 3)
@@ -29,12 +30,13 @@ const Players = ({
 
   const currentPlayers = playerGroup();
 
+  // Check to see if selected player is the one with the higher score
   const onClickPlayer = e => {
-    const { src, textContent } = e.target;
+    const { src } = e.target;
     const highestScore = Math.max(
       ..._.map(currentPlayers, player => player.fppg)
     );
-
+    // Cache current pair of players for re-render after selection
     if (correctCount < 10 && newRound) {
       setCachedPlayers(currentPlayers);
       setPlayerSelected(true);
@@ -134,7 +136,7 @@ Players.propTypes = {
         starting_order: PropTypes.bool,
         team: PropTypes.object
       })
-    ) || PropTypes.array,
+    ) || PropTypes.array.isRequired,
   setCachedPlayers: PropTypes.func.isRequired
 };
 
