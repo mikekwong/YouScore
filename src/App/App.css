@@ -13,9 +13,6 @@
   margin: 0;
 }
 
-.main {
-}
-
 @media (max-width: 700px) {
   .app {
     height: 1400px;

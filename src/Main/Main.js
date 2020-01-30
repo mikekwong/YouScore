@@ -1,6 +1,7 @@
 import React from "react";
 import Players from "../Players/Players";
 import PropTypes from "prop-types";
+import "./Main.css";
 
 const Main = ({
   error,
@@ -21,7 +22,6 @@ const Main = ({
       ) : (
         <section className="players">
           <p className="players__score">Score: {correctCount}</p>
-
           <Players
             correctCount={correctCount}
             setCorrectCount={setCorrectCount}

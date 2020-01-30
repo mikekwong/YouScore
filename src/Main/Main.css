@@ -1,1 +1,14 @@
+.main__loading,
+.main__error {
+  margin-top: 200px;
+  color: #fff;
+}
 
+.main_loading {
+  font-size: 60px;
+}
+
+.main__error {
+  font-size: 40px;
+  color: rgb(43, 43, 43);
+}
