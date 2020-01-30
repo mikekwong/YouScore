@@ -16,7 +16,9 @@ const Players = ({
   const [correctCount, setCorrectCount] = React.useState(0);
   const [newRound, setNewRound] = React.useState(true);
 
-  useEffect(() => setPlayerSelected(false));
+  useEffect(() => {
+    if (newRound) setPlayerSelected(false);
+  });
 
   const playerGroup = () => {
     const randomPlayer = Math.floor(
@@ -33,7 +35,7 @@ const Players = ({
       ..._.map(currentPlayers, player => player.fppg)
     );
 
-    if (correctCount < 10 && playerSelected === false && newRound === true) {
+    if (correctCount < 10 && newRound) {
       setCachedPlayers(currentPlayers);
       setPlayerSelected(true);
       setNewRound(false);
@@ -56,7 +58,6 @@ const Players = ({
         onClickPlayer={onClickPlayer}
         player={player}
         playerSelected={playerSelected}
-        newRound={newRound}
       />
     ));
   };

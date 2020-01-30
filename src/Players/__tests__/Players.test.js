@@ -64,9 +64,8 @@ describe("Players component", () => {
     wrapper = setup();
   });
 
-  test("shows Players component ", () => {
-    const players = wrapper;
-    expect(players.length).toBe(1);
+  test("shows Player component when playerSelected is true", () => {
+    expect(wrapper.length).toBe(1);
   });
 
   test("shows default message of zero score", () => {

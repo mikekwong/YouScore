@@ -3,18 +3,6 @@ import { shallow } from "enzyme";
 
 import Player from "../Player";
 
-// describe("clicking", () => {
-//   const onCountChange = jest.fn();
-
-//   let wrapper;
-//   beforeEach(() => {
-//     wrapper = mount(<Player onCountChange={onCountChange} />);
-//   });
-//   test("should ", () => {
-//     console.log(wrapper.debug());
-//   });
-// });
-
 const dummyFunc = () => {};
 const dummyArray = {
   id: "1",
@@ -36,7 +24,7 @@ const dummyArray = {
 };
 
 describe("Player component", () => {
-  // const onClickPlayer = jest.fn();
+  // const mockFunc = jest.fn();
 
   const setup = (props = {}) => {
     return shallow(<Player {...props} />);
@@ -73,8 +61,8 @@ describe("Player component", () => {
   //   const image = wrapper.find("img");
 
   //   const mockEvent = { target: { src: "imageName.png" } };
-  //   image.simulate("click", mockEvent);
-  //   expect(onClickPlayer).toBeCalledTimes(1);
+  //   image.simulate("click");
+  //   expect(mockFunc).toBeCalledTimes(1);
   // });
 });
 

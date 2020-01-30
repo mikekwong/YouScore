@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import _ from "lodash";
 import useFetch from "../utils/useFetch";
@@ -6,7 +6,7 @@ import useFetch from "../utils/useFetch";
 import Main from "../Main/Main";
 
 const App = () => {
-  const [cachedPlayers, setCachedPlayers] = useState([]);
+  const [cachedPlayers, setCachedPlayers] = React.useState([]);
 
   const {
     data,

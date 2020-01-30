@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Players from "../Players/Players";
 import PropTypes from "prop-types";
 
@@ -9,8 +9,8 @@ const Main = ({
   cachedPlayers,
   setCachedPlayers
 }) => {
-  const [playerSelected, setPlayerSelected] = useState(false);
-  const [correct, setCorrect] = useState(false);
+  const [playerSelected, setPlayerSelected] = React.useState(false);
+  const [correct, setCorrect] = React.useState(false);
 
   return (
     <div className="main">
