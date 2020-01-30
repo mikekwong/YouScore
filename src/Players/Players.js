@@ -62,8 +62,6 @@ const Players = ({
     ));
   };
 
-  const playerNums = _.map(currentPlayers, player => player.fppg);
-
   return (
     <div className="container-players">
       <p className="score">Your score: {correctCount}</p>

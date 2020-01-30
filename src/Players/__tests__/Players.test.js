@@ -1,5 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
+import { renderHook, act } from "@testing-library/react-hooks";
 
 import Players from "../Players";
 import Player from "../../Player/Player";
@@ -62,10 +63,6 @@ describe("Players component", () => {
   let wrapper;
   beforeEach(() => {
     wrapper = setup();
-  });
-
-  test("shows Player component when playerSelected is true", () => {
-    expect(wrapper.length).toBe(1);
   });
 
   test("shows default message of zero score", () => {

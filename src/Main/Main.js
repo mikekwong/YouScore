@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Players from "../Players/Players";
 import PropTypes from "prop-types";
 
