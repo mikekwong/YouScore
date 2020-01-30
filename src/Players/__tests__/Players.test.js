@@ -1,6 +1,5 @@
 import React from "react";
 import { shallow } from "enzyme";
-import { renderHook, act } from "@testing-library/react-hooks";
 
 import Players from "../Players";
 import Player from "../../Player/Player";

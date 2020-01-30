@@ -16,7 +16,7 @@ const App = () => {
     { players: [] }
   );
 
-  // Discard players that having null fppg values
+  // Return array of players whose ffpg values are not null
   const fppgPlayers = _.filter(data.players, player => player.fppg !== null);
 
   return (
