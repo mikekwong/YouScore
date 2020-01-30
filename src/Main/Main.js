@@ -13,10 +13,10 @@ const Main = ({
   const [correct, setCorrect] = React.useState(false);
 
   return (
-    <div className="main">
-      {error && <p className="error">Something went wrong...</p>}
+    <div className="main--container">
+      {error && <p className="main__error">Something went wrong...</p>}
       {loading ? (
-        <p className="loading">Loading...</p>
+        <p className="main__loading">Loading...</p>
       ) : (
         <Players
           correct={correct}

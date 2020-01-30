@@ -13,12 +13,17 @@ const Player = ({ player, onClickPlayer, playerSelected }) => {
   } = player;
 
   return (
-    <div className="player">
-      <img src={url} alt="profile" onClick={e => onClickPlayer(e)} />
-      <p className="name">
+    <div className="player--container">
+      <img
+        className="player__img"
+        src={url}
+        alt="profile"
+        onClick={e => onClickPlayer(e)}
+      />
+      <p className="player__name">
         {first_name} {last_name}
       </p>
-      {playerSelected && <p className="fppg">{fppg.toFixed(1)}</p>}
+      {playerSelected && <p className="player__fppg">{fppg.toFixed(1)}</p>}
     </div>
   );
 };

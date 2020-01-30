@@ -20,15 +20,21 @@ const App = () => {
   const fppgPlayers = _.filter(data.players, player => player.fppg !== null);
 
   return (
-    <div className="App">
-      <h1>Guess which player has a higher FPPG?</h1>
-      <Main
-        loading={loading}
-        error={error}
-        fppgPlayers={fppgPlayers}
-        cachedPlayers={cachedPlayers}
-        setCachedPlayers={setCachedPlayers}
-      />
+    <div className="app">
+      <header className="header">
+        <h1 className="header--headline">
+          Guess which player has a higher FPPG?
+        </h1>
+      </header>
+      <main className="main">
+        <Main
+          loading={loading}
+          error={error}
+          fppgPlayers={fppgPlayers}
+          cachedPlayers={cachedPlayers}
+          setCachedPlayers={setCachedPlayers}
+        />
+      </main>
     </div>
   );
 };

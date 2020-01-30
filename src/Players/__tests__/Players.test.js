@@ -66,7 +66,7 @@ describe("Players component", () => {
   });
 
   test("shows default message of zero score", () => {
-    const scoreMessage = wrapper.find(".score");
+    const scoreMessage = wrapper.find(".players__score");
     expect(scoreMessage.text()).toEqual("Your score: 0");
   });
 });
@@ -81,14 +81,14 @@ describe("renders status based upon player selection", () => {
     const wrapper = setup({
       correct: true
     });
-    const youWin = wrapper.find(".correct");
+    const youWin = wrapper.find(".players__correct");
     expect(youWin.length).toBe(1);
   });
   test("shows `Try Again!` if picking the player with the higher fppg score", () => {
     const wrapper = setup({
       correct: false
     });
-    const youWin = wrapper.find(".incorrect");
+    const youWin = wrapper.find(".players__incorrect");
     expect(youWin.length).toBe(1);
   });
 });
@@ -117,60 +117,3 @@ describe("renders the next round button", () => {
     expect(setState).toHaveBeenCalled();
   });
 });
-
-// describe('player is selected', () => {
-//   test('state updates boolean to true upon player selection', () => {
-//     const mockSetPlayerSelected = jest.fn()
-//     React.useState = jest.fn(() => ["", mockSetPlayerSelected])
-
-//     const wrapper = setup()
-//     const
-//   });
-// });
-
-// describe("Score text", () => {
-//   const onClickChange = jest.fn();
-//   let wrapper;
-//   beforeEach(() => {
-//     wrapper = shallow(<Players onClickChange={onClickChange} />);
-//   });
-
-//   test("shows default message of zero score", () => {
-//     const scoreMessage = wrapper.find(".score");
-//     expect(scoreMessage.text()).toEqual("Your score: 0");
-//   });
-
-//   test("correctly increments count by 1", () => {
-//     expect(wrapper.find(".player").length).toBe(2);
-//     // const scoreMessage = wrapper.find(".score");
-//     // expect(scoreMessage.length).toBe(1);
-//   });
-
-//   // test('shows fppg score upon clicking a player', () => {
-//   //   const correctGuesses = wrapper.find(".score");
-//   //   expect(correctGuesses.length).toBe(1);
-//   // });
-// });
-
-// describe("Players component", () => {
-//   // let wrapper;
-//   // beforeEach(() => {
-//   //   wrapper = shallow(<Players />);
-//   // });
-
-//   test("should render a <div/>", () => {
-//     const wrapper = shallow(<Players />);
-//     const containerPlayers = wrapper.find(".container-players");
-//     expect(containerPlayers.length).toBe(1);
-//   });
-
-//   // const setup = (props = {}) => {
-//   //   return shallow(<Players {...props} />);
-//   // };
-
-//   // test("shows Players component", () => {
-//   //   const wrapper = setup({});
-//   //   const loadingIndicator = wrapper.find(".container-players");
-//   //   expect(loadingIndicator.length).toBe(1);
-//   // });
-// });

@@ -63,19 +63,24 @@ const Players = ({
   };
 
   return (
-    <div className="container-players">
-      <p className="score">Your score: {correctCount}</p>
+    <div className="players--container">
+      <p className="players__score">Your score: {correctCount}</p>
       {!playerSelected ? (
         mapPlayers(currentPlayers)
       ) : (
         <Fragment>
           {correct ? (
-            <p className="correct">Correct!</p>
+            <p className="players__correct">Correct!</p>
           ) : (
-            <p className="incorrect">Try again!</p>
+            <p className="players__incorrect">Try again!</p>
           )}
           {correctCount !== 10 && (
-            <button onClick={() => setNewRound(true)}>NEXT ROUND</button>
+            <button
+              className="players__newRound"
+              onClick={() => setNewRound(true)}
+            >
+              NEXT ROUND
+            </button>
           )}
           {mapPlayers(cachedPlayers)}
         </Fragment>

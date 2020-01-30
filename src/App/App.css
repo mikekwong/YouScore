@@ -1,7 +1,21 @@
-.App {
+.app {
+  background-color: rgb(10, 19, 34);
   text-align: center;
 }
 
-.hidden {
-  display: none;
+.header {
+  color: #fff;
+  padding-top: 40px;
+}
+
+.header--headline {
+  margin: 0;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
 }

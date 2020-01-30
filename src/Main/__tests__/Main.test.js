@@ -68,7 +68,7 @@ describe("Error message", () => {
     const wrapper = setup({
       error: "network error"
     });
-    const error = wrapper.find(".error");
+    const error = wrapper.find(".main__error");
     expect(error.text()).toEqual("Something went wrong...");
   });
 
@@ -76,7 +76,7 @@ describe("Error message", () => {
     const wrapper = setup({
       error: ""
     });
-    const error = wrapper.find(".error");
+    const error = wrapper.find(".main__error");
     expect(error.length).toBe(0);
   });
 });
@@ -84,7 +84,7 @@ describe("Error message", () => {
 describe("Player component or loading message", () => {
   test("shows loading message when `loading` prop is true ", () => {
     const wrapper = setup({ loading: true });
-    const loadingIndicator = wrapper.find(".loading");
+    const loadingIndicator = wrapper.find(".main__loading");
     expect(loadingIndicator.text()).toEqual("Loading...");
   });
 

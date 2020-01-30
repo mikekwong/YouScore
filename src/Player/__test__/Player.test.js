@@ -24,8 +24,6 @@ const dummyArray = {
 };
 
 describe("Player component", () => {
-  // const mockFunc = jest.fn();
-
   const setup = (props = {}) => {
     return shallow(<Player {...props} />);
   };
@@ -50,29 +48,10 @@ describe("Player component", () => {
   });
 
   test("shows name tag", () => {
-    expect(wrapper.find(".name").length).toEqual(1);
+    expect(wrapper.find(".player__name").length).toEqual(1);
   });
 
   test("shows fppg score tag", () => {
-    expect(wrapper.find(".fppg").length).toEqual(1);
+    expect(wrapper.find(".player__fppg").length).toEqual(1);
   });
-
-  // test("clicking an image", () => {
-  //   const image = wrapper.find("img");
-
-  //   const mockEvent = { target: { src: "imageName.png" } };
-  //   image.simulate("click");
-  //   expect(mockFunc).toBeCalledTimes(1);
-  // });
 });
-
-// test("state updates to true upon player selection", () => {
-//   const wrapper = shallow(<Player />);
-//   const button = wrapper.find("img");
-//   expect(button.length).toBe(1);
-
-//   console.log(wrapper.debug());
-
-//   // const mockEvent = { target: { player: "John Lin" } };
-//   // playerPair.simulate("click", mockEvent);
-// });
