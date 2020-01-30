@@ -23,7 +23,9 @@ const Player = ({ player, onClickPlayer, playerSelected }) => {
       <p className="player__name">
         {first_name} {last_name}
       </p>
-      {playerSelected && <p className="player__fppg">{fppg.toFixed(1)}</p>}
+      {playerSelected && (
+        <p className="player__fppg">FPPG: {fppg.toFixed(1)}</p>
+      )}
     </div>
   );
 };

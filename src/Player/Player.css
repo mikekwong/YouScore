@@ -1,7 +1,12 @@
-.player {
-  width: 50%;
+.player--container {
+  /* width: 50%; */
+  margin: 150px auto;
 }
 
-.player img {
+.player__img {
   width: 250px;
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 10px solid #30e37b;
 }

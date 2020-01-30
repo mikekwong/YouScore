@@ -11,9 +11,10 @@ const Players = ({
   cachedPlayers,
   setCachedPlayers,
   correct,
-  setCorrect
+  setCorrect,
+  correctCount,
+  setCorrectCount
 }) => {
-  const [correctCount, setCorrectCount] = React.useState(0);
   const [newRound, setNewRound] = React.useState(true);
 
   useEffect(() => {
@@ -65,29 +66,25 @@ const Players = ({
   };
 
   return (
-    <div className="players--container">
-      <p className="players__score">Your score: {correctCount}</p>
+    <Fragment>
       {!playerSelected ? (
-        mapPlayers(currentPlayers)
+        <div className="players--container">{mapPlayers(currentPlayers)}</div>
       ) : (
         <Fragment>
           {correct ? (
-            <p className="players__correct">Correct!</p>
+            <p className="status correct">Correct!</p>
           ) : (
-            <p className="players__incorrect">Try again!</p>
+            <p className="status incorrect">Try again!</p>
           )}
           {correctCount !== 10 && (
-            <button
-              className="players__newRound"
-              onClick={() => setNewRound(true)}
-            >
+            <button className="newRound" onClick={() => setNewRound(true)}>
               NEXT ROUND
             </button>
           )}
-          {mapPlayers(cachedPlayers)}
+          <div className="players--container">{mapPlayers(cachedPlayers)}</div>
         </Fragment>
       )}
-    </div>
+    </Fragment>
   );
 };
 

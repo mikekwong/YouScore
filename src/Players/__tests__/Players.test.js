@@ -58,18 +58,6 @@ const setup = (props = {}) => {
   return shallow(<Players {...setupProps} />);
 };
 
-describe("Players component", () => {
-  let wrapper;
-  beforeEach(() => {
-    wrapper = setup();
-  });
-
-  test("shows default message of zero score", () => {
-    const scoreMessage = wrapper.find(".players__score");
-    expect(scoreMessage.text()).toEqual("Your score: 0");
-  });
-});
-
 describe("renders status based upon player selection", () => {
   let wrapper;
   beforeEach(() => {
@@ -80,14 +68,14 @@ describe("renders status based upon player selection", () => {
     const wrapper = setup({
       correct: true
     });
-    const youWin = wrapper.find(".players__correct");
+    const youWin = wrapper.find(".correct");
     expect(youWin.length).toBe(1);
   });
   test("shows `Try Again!` if picking the player with the higher fppg score", () => {
     const wrapper = setup({
       correct: false
     });
-    const youWin = wrapper.find(".players__incorrect");
+    const youWin = wrapper.find(".incorrect");
     expect(youWin.length).toBe(1);
   });
 });

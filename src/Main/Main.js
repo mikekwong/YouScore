@@ -10,6 +10,7 @@ const Main = ({
   setCachedPlayers
 }) => {
   const [playerSelected, setPlayerSelected] = React.useState(false);
+  const [correctCount, setCorrectCount] = React.useState(0);
   const [correct, setCorrect] = React.useState(false);
 
   return (
@@ -18,15 +19,21 @@ const Main = ({
       {loading ? (
         <p className="main__loading">Loading...</p>
       ) : (
-        <Players
-          correct={correct}
-          setCorrect={setCorrect}
-          playerSelected={playerSelected}
-          setPlayerSelected={setPlayerSelected}
-          fppgPlayers={fppgPlayers}
-          cachedPlayers={cachedPlayers}
-          setCachedPlayers={setCachedPlayers}
-        />
+        <section className="players">
+          <p className="players__score">Your score: {correctCount}</p>
+
+          <Players
+            correctCount={correctCount}
+            setCorrectCount={setCorrectCount}
+            correct={correct}
+            setCorrect={setCorrect}
+            playerSelected={playerSelected}
+            setPlayerSelected={setPlayerSelected}
+            fppgPlayers={fppgPlayers}
+            cachedPlayers={cachedPlayers}
+            setCachedPlayers={setCachedPlayers}
+          />
+        </section>
       )}
     </div>
   );

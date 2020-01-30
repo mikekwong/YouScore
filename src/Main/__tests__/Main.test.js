@@ -56,9 +56,18 @@ const setup = (props = {}) => {
 };
 
 describe("Main component", () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = setup();
+  });
+
   test("should render a <div/>", () => {
     const wrapper = setup();
     expect(wrapper.find("div").length).toEqual(1);
+  });
+  test("shows default message of zero score", () => {
+    const scoreMessage = wrapper.find(".players__score");
+    expect(scoreMessage.text()).toEqual("Your score: 0");
   });
 });
 

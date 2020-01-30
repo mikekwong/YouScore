@@ -1,0 +1,13 @@
+.players--container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.players__score {
+}
+
+.players__newRound {
+  cursor: pointer;
+}
