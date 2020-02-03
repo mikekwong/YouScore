@@ -12,6 +12,8 @@
 
 .player__img:hover {
   border: 10px solid #71faaa;
+  transform: scale(1.05);
+  transition: 0.2s all;
 }
 
 .player__name {
