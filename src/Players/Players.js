@@ -35,7 +35,9 @@ const Players = ({
   const onClickPlayer = e => {
     const { src } = e.target;
     const highestScore = Math.max(
-      ..._.map(currentPlayers, player => player.fppg)
+      // ..._.map(currentPlayers, player => player.fppg)
+      // Lodash shortcut
+      ..._.map(currentPlayers, "fppg")
     );
     // Cache current pair of players for re-render after selection
     if (correctCount < 10 && newRound) {
@@ -43,8 +45,11 @@ const Players = ({
       setPlayerSelected(true);
       setNewRound(false);
       if (
-        _.filter(currentPlayers, player => player.images.default.url === src)[0]
-          .fppg === highestScore
+        // _.filter(currentPlayers, player => player.images.default.url === src)[0]
+        //   .fppg === highestScore
+        // lodash shorthand
+        _.filter(currentPlayers, ["images.default.url", src])[0].fppg ===
+        highestScore
       ) {
         setCorrect(true);
         setCorrectCount(correctCount + 1);
